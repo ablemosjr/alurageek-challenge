@@ -28,6 +28,28 @@ header {
   color: var(--primary);
 }
 
+footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer img {
+  width: 220px;
+  cursor: pointer;
+}
+
+.footer__about {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+footer span {
+  color: var(--grey-300);
+  font-size: .875rem;
+  font-weight: 300;
+}
+
 @media screen and (max-width: 640px) {
   .header__img {
     width: 200px;
@@ -43,5 +65,16 @@ header {
   
   .header__img {
     width: 260px;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__about {
+    text-align: center;
+    margin-top: 1rem;
+    gap: .5rem;
   }
 }
