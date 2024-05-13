@@ -1,3 +1,14 @@
+:root {
+  --primary: #FFF;
+  --grey-300: #D1D5DB;
+  --secondary: #000;
+  --accent: #E38035;
+  --bg-color: #363841;
+  --card-color: #4B4F5B;
+
+  --px-20: 1.25rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +21,10 @@ body {
   font-family: 'Outfit', sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+a {
+  list-style: none;
 }
 
 .game-font {

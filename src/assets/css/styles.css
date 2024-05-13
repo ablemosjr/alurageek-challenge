@@ -1,1 +1,47 @@
 @import url('global.css');
+
+body {
+  background-color: var(--bg-color);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__img {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem var(--px-20);
+}
+
+.header__link {
+  color: var(--grey-300);
+}
+
+.header__link:hover {
+  color: var(--primary);
+}
+
+@media screen and (max-width: 640px) {
+  .header__img {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  
+  .header__img {
+    width: 260px;
+  }
+}
