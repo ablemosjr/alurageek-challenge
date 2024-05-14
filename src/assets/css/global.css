@@ -6,8 +6,10 @@
   --bg-color: #363841;
   --card-color: #4B4F5B;
 
+  --p-12: .75rem;
   --p-20: 1.25rem;
 
+  --m-16: 1rem;
   --m-32: 2rem;
   --m-64: 4rem;
   --m-160: 10rem;

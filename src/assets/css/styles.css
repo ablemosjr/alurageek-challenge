@@ -166,6 +166,83 @@ main {
   color: var(--secondary);
 }
 
+.productList {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--m-16);
+}
+
+.card {
+  width: 100%;
+  height: 300px;
+  background-color: var(--card-color);
+  border-radius: var(--radius);
+}
+
+.card__image {
+  width: 100%;
+  height: 65%;
+  position: relative;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-right-radius: var(--radius);
+  border-top-left-radius: var(--radius);
+}
+
+.card__image span {
+  font-size: .875rem;
+  font-weight: 300;
+  color: var(--primary);
+  position: absolute;
+  top: var(--p-12);
+  right: var(--p-12);
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 35%;
+  padding: var(--p-12);
+}
+
+.card__info-name {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--primary);
+}
+
+.card__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card__info-price {
+  color: var(--primary);
+}
+
+.card__btn {
+  outline: none;
+  border: none;
+  background-color: var(--card-color);
+  cursor: pointer;
+}
+
+.card__btn:hover img {
+  transform: scale(1.2);
+  filter: brightness(var(--brightness));
+}
+
+.card__btn img {
+  width: 28px;
+  height: 28px;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -198,6 +275,19 @@ footer img {
   }
 }
 
+@media screen and (max-width: 560px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__about {
+    text-align: center;
+    margin-top: 1rem;
+    gap: .5rem;
+  }
+}
+
 @media screen and (max-width: 320px) {
   header {
     display: flex;
@@ -208,15 +298,22 @@ footer img {
   .header__img {
     width: 260px;
   }
+}
 
-  footer {
-    flex-direction: column;
-    align-items: center;
+@media screen and (min-width: 476px) {
+  .productList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .footer__about {
-    text-align: center;
-    margin-top: 1rem;
-    gap: .5rem;
+@media screen and (min-width: 768px) {
+  .productList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .productList {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
