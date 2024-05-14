@@ -26,13 +26,67 @@
       </nav>
     </header>
 
+    <main>
+      <h1 class="main__title">Meus produtos</h1>
+
+      <button id="openModalToCreate"
+        type="button"
+        class="modal__button game-font"
+      > Adicionar Produto
+      </button>
+
+      <section class="modal" id="modalToCreate">
+        <div class="modal__card">
+          <div class="modal__card-header">
+            <h3>Adicionar Produto</h3>
+            <span id="closeModalToCreate">&times;</span>
+          </div>
+          
+          <form action="">
+            <div class="form__wrapper">
+              <div class="form__input">
+                <label for="productName">
+                  Nome:
+                </label>
+                <input id="productName" name="productName" type="text" required>
+              </div>
+              <span id="err-productName">Mensagem de erro</span>
+
+              <div class="form__input">
+                <label for="productPrice">
+                  Preço:
+                </label>
+                <input id="productPrice" name="productPrice" type="number" required>
+              </div>
+              <span id="err-productPrice">Mensagem de erro</span>
+
+              <div class="form__input">
+                <label for="productImageUrl">
+                  Imagem:
+                </label>
+                <input id="productImageUrl" name="productImageUrl" type="text" required>
+              </div>
+              <span id="err-productImageUrl">Mensagem de erro</span>
+            </div>
+
+            <div class="form__action">
+              <button class="form__action-button game-font form__action-filled" type="button">Salvar</button>
+              <button class="form__action-button game-font form__action-unfilled" type="button">Limpar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
     <footer>
       <img src="./src/assets/image/alurageek.svg" alt="Logo AluraGeek">
       <div class="footer__about">
-        <span>Desenvolvidor por Alessandro Lemos</span>
+        <span>Desenvolvido por Alessandro Lemos</span>
         <span>Alura Latam & Oracle Next Education - 2024</span>
       </div>
     </footer>
   </div>
+
+  <script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
