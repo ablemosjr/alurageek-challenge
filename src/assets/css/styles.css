@@ -172,6 +172,12 @@ main {
   gap: var(--m-16);
 }
 
+.productList__empty {
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .card {
   width: 100%;
   height: 300px;
