@@ -26,7 +26,20 @@ async function createProduct(product, price, imageUrl) {
   return createdProduct;
 }
 
+async function deleteProduct(id) {
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (!response.ok) {
+    throw new Error('Não foi possível excluir o produto.');
+  }
+
+  return response.json();
+}
+
 export const API = {
   getAllProducts,
-  createProduct
+  createProduct,
+  deleteProduct
 }

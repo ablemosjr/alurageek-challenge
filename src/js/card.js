@@ -10,7 +10,11 @@ export default function card(id, product, price, imageUrl) {
 
         <div class="card__info-wrapper">
           <span class="card__info-price game-font">R$${price}</span>
-          <button class="card__btn" type="button">
+          <button class="card__btn" 
+            type="button" 
+            data-id="${id}"
+            onclick="removeProduct(this)"
+          >
             <img src="./src/assets/image/trash.svg" alt="Lixeira">
           </button>
         </div>

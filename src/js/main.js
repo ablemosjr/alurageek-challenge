@@ -99,5 +99,19 @@ submitNewProduct.addEventListener('submit', async (ev) => {
   }
 });
 
+// DELETE - Deleta produto no db
+async function removeProduct(el) {
+  const id = el.getAttribute('data-id');
+
+  try {
+    await API.deleteProduct(id);
+
+    window.location.reload();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Garante acessibilidade globalmente
 window.cleanModal = cleanModal;
+window.removeProduct = removeProduct;
