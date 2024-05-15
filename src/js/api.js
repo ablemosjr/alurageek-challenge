@@ -7,6 +7,26 @@ async function getAllProducts() {
   return products;
 }
 
+async function createProduct(product, price, imageUrl) {
+  const response = await fetch(`${API_URL}/products`, {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({
+      name: product,
+      price: price,
+      imageUrl: imageUrl
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error('Não foi possível criar o produto.');
+  }
+
+  const createdProduct = await response.json();
+  return createdProduct;
+}
+
 export const API = {
-  getAllProducts
+  getAllProducts,
+  createProduct
 }

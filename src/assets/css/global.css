@@ -16,6 +16,7 @@
 
   --brightness: 1.15;
   --radius: .15rem;
+  --scale: 1.025;
 }
 
 * {

@@ -52,6 +52,7 @@ main {
 
 .modal__button:hover {
   filter: brightness(var(--brightness));
+  transform: scale(var(--scale));
 }
 
 .modal {
@@ -108,8 +109,8 @@ main {
   display: flex;
   border: 1px solid var(--primary);
   border-radius: 999px;
-  margin-top: .5rem;
-  margin-bottom: .25rem;
+  margin-top: .75rem;
+  margin-bottom: .375rem;
 }
 
 .form__input label {
@@ -133,6 +134,12 @@ main {
   padding: .5rem 1rem .5rem 0;
 }
 
+.form__error {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
 .form__action {
   display: flex;
   justify-content: flex-end;
@@ -153,6 +160,10 @@ main {
 
 .form__action-filled {
   background-color: var(--accent);
+}
+
+.form__action-filled:hover {
+  transform: scale(var(--scale));
 }
 
 .form__action-unfilled {
