@@ -1,6 +1,7 @@
 import { API } from './api.js';
-import card from './card.js';
 import { check } from './error.js';
+import card from './card.js';
+import modal from './modal.js';
 
 // GET - Carrega produtos do db
 await createCardList();
@@ -31,74 +32,6 @@ async function createCardList() {
   }
 }
 
-// Limpar Modal
-function cleanModal() {
-  const errNewName = document.getElementById('err-productName');
-  const errNewPrice = document.getElementById('err-productPrice');
-  const errNewImage = document.getElementById('err-productImageUrl');
-
-  nameCreate.value = '';
-  priceCreate.value = '';
-  imageCreate.value = '';
-  errNewName.textContent = '';
-  errNewPrice.textContent = '';
-  errNewImage.textContent = '';
-}
-
-// Modal - Adicionar Produto
-const modalCreate = document.getElementById('modalToCreate');
-const btnModalCreate = document.getElementById('openModalToCreate');
-const closeModalCreate = document.getElementById('closeModalToCreate');
-
-const nameCreate = document.getElementById('productName');
-const priceCreate = document.getElementById('productPrice');
-const imageCreate = document.getElementById('productImageUrl');
-
-const submitNewProduct = document.getElementById('formNewProd');
-
-btnModalCreate.onclick = function () {
-  modalCreate.style.display = 'block';
-}
-
-closeModalCreate.onclick = function () {
-  modalCreate.style.display = 'none';
-  cleanModal();
-}
-
-// Valida input - Adicionar Produto
-nameCreate.addEventListener('input', (ev) => {
-  check(ev.target);
-});
-
-priceCreate.addEventListener('input', (ev) => {
-  check(ev.target);
-});
-
-imageCreate.addEventListener('input', (ev) => {
-  check(ev.target);
-});
-
-// POST - Cria novo produto no db
-submitNewProduct.addEventListener('submit', async (ev) => {
-  ev.preventDefault();
-
-  const isNameValid = check(nameCreate);
-  const isPriceValid = check(priceCreate);
-  const isUrlValid = check(imageCreate);
-
-  try {
-    if (isNameValid && isPriceValid && isUrlValid) {
-      await API.createProduct(nameCreate.value, priceCreate.value, imageCreate.value);
-
-      window.location.reload();
-    } else {
-      console.error('Erro no preenchimento do formulário.');
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 // DELETE - Deleta produto no db
 async function removeProduct(el) {
   const id = el.getAttribute('data-id');
@@ -112,6 +45,85 @@ async function removeProduct(el) {
   }
 }
 
+const modalCreate = document.getElementById('openModalToCreate');
+
+modalCreate.addEventListener('click', () => {
+  modalManipulation('Adicionar');
+});
+
+function modalManipulation(type) {
+  const modalSection = document.getElementById('modal');
+  modalSection.innerHTML = modal(type);
+  modalSection.style.display = 'block';
+
+  const closeModal = document.getElementById('closeModal');
+  closeModal.onclick = function () {
+    modalSection.style.display = 'none';
+    clean();
+  }
+
+  const name = document.getElementById('productName');
+  const price = document.getElementById('productPrice');
+  const imageUrl = document.getElementById('productImageUrl');
+
+  const cleanModal = document.getElementById('cleanModal');
+  cleanModal.addEventListener('click', () => {
+    clean();
+  });
+  
+  function clean() {
+    const errName = document.getElementById('err-productName');
+    const errPrice = document.getElementById('err-productPrice');
+    const errImageUrl = document.getElementById('err-productImageUrl');
+
+    name.value = '';
+    price.value = '';
+    imageUrl.value = '';
+
+    errName.textContent = '';
+    errPrice.textContent = '';
+    errImageUrl.textContent = '';
+  }
+
+  name.addEventListener('input', (ev) => {
+    check(ev.target);
+  });
+
+  price.addEventListener('input', (ev) => {
+    check(ev.target);
+  });
+
+  imageUrl.addEventListener('input', (ev) => {
+    check(ev.target);
+  });
+
+  const formSubmit = document.getElementById('form');
+  formSubmit.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+
+    const isNameValid = check(name);
+    const isPriceValid = check(price);
+    const isUrlValid = check(imageUrl);
+
+    try {
+      if (isNameValid && isPriceValid && isUrlValid) {
+// POST - Cria novo produto no db
+        if (type === 'Adicionar') {
+          await API.createProduct(name.value, price.value, imageUrl.value);
+        }
+        if (type === 'Alterar') {
+          console.log(type);
+        }
+
+        window.location.reload();
+      } else {
+        console.error('Erro no preenchimento do formulário.');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
+}
+
 // Garante acessibilidade globalmente
-window.cleanModal = cleanModal;
 window.removeProduct = removeProduct;
