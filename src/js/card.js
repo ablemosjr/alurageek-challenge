@@ -1,7 +1,7 @@
 export default function card(id, product, price, imageUrl) {
   return `
     <div class="card">
-      <div class="card__image">
+      <div class="card__image" onclick="modalUpdate(${id})">
         <img src="${imageUrl}" alt="Imagem ${product}">
         <span>${id}</span>
       </div>

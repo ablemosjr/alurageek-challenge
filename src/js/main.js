@@ -51,7 +51,11 @@ modalCreate.addEventListener('click', () => {
   modalManipulation('Adicionar');
 });
 
-function modalManipulation(type) {
+function modalUpdate(id) {
+  modalManipulation('Alterar', id);
+}
+
+async function modalManipulation(type, id) {
   const modalSection = document.getElementById('modal');
   modalSection.innerHTML = modal(type);
   modalSection.style.display = 'block';
@@ -97,6 +101,14 @@ function modalManipulation(type) {
     check(ev.target);
   });
 
+  if (type === 'Alterar') {
+    const prod = await API.getProductById(id);
+    
+    name.value = prod.name;
+    price.value = prod.price;
+    imageUrl.value = prod.imageUrl;
+  }
+
   const formSubmit = document.getElementById('form');
   formSubmit.addEventListener('submit', async (ev) => {
     ev.preventDefault();
@@ -104,26 +116,37 @@ function modalManipulation(type) {
     const isNameValid = check(name);
     const isPriceValid = check(price);
     const isUrlValid = check(imageUrl);
-
-    try {
-      if (isNameValid && isPriceValid && isUrlValid) {
-// POST - Cria novo produto no db
-        if (type === 'Adicionar') {
+// POST - Adicionar produto no db
+    if (type === 'Adicionar') {
+      try {
+        if (isNameValid && isPriceValid && isUrlValid) {
           await API.createProduct(name.value, price.value, imageUrl.value);
-        }
-        if (type === 'Alterar') {
-          console.log(type);
-        }
 
-        window.location.reload();
-      } else {
-        console.error('Erro no preenchimento do formulário.');
+          window.location.reload();
+        } else {
+          console.error('Erro no preenchimento do formulário de adicionar produto.');
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
+    }
+// PUT - Alterar produto no db
+    if (type === 'Alterar') {
+      try {
+        if (isNameValid && isPriceValid && isUrlValid) {
+          await API.updateProduct(id, name.value, price.value, imageUrl.value);
+
+          window.location.reload();
+        } else {
+          console.error('Erro no preenchimento do formulário de atualizar produto.');
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   });
 }
 
 // Garante acessibilidade globalmente
 window.removeProduct = removeProduct;
+window.modalUpdate = modalUpdate;

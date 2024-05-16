@@ -38,8 +38,36 @@ async function deleteProduct(id) {
   return response.json();
 }
 
+async function getProductById(id) {
+  const response = await fetch(`${API_URL}/products/${id}`);
+  const product = await response.json();
+
+  return product;
+}
+
+async function updateProduct(id, product, price, imageUrl) {
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({
+      name: product,
+      price: price,
+      imageUrl: imageUrl
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error('Erro ao atualizar o produto.');
+  }
+
+  const updatedProduct = await response.json();
+  return updatedProduct;
+}
+
 export const API = {
   getAllProducts,
   createProduct,
-  deleteProduct
+  deleteProduct,
+  getProductById,
+  updateProduct
 }
